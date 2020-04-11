@@ -113,16 +113,35 @@ public class Matrix {
         } else if (columns == 2) {
             return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
         } else {
-
+            double result = 0;
+            for (int i = 0; i < columns; i++) {
+                result += dop(this, 0, i);
+            }
+            return result;
         }
-        return 0;
     }
 
-    private static double dop(Matrix m, int i, int j) {
-        return 0;
+    private static double dop(Matrix m, int i, int j) throws Exception {
+        return Math.pow(-1, i + j) * m.getElement(i, j) * minor(m, i, j);
     }
 
-    private static double minor(Matrix m, int i, int j) {
-        return 0;
+    private static double minor(Matrix m, int i, int j) throws Exception {
+        Matrix buf = new Matrix(m.lines - 1, m.columns - 1);
+        int bufk = 0, bufl = 0;
+        for (int k = 0; k < m.lines; k++) {
+            if (k == i) {
+                bufk = 1;
+                continue;
+            }
+            for (int l = 0; l < m.columns; l++) {
+                if (l == j) {
+                    bufl = 1;
+                    continue;
+                }
+                buf.setElement(k - bufk, l - bufl, m.getElement(k, l));
+            }
+            bufl = 0;
+        }
+        return buf.determinant();
     }
 }

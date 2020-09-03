@@ -5,29 +5,36 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(System.in);
-        double[][] delta = new double[5][5];
-        double[][] deltaA = new double[5][5];
-        double[][] deltaB = new double[5][5];
-        double[][] deltaC = new double[5][5];
-        double[][] deltaD = new double[5][5];
-        double[][] deltaE = new double[5][5];
-        int x, answer;
-        for (int i = 0; i < 5; i++) {
-            x = in.nextInt();
-            answer = in.nextInt();
-            for (int j = 0; j < 5; j++) {
-                delta[i][j] = (int) Math.pow(x, j);
-                deltaA[i][j] = (int) Math.pow(x, j);
-                deltaB[i][j] = (int) Math.pow(x, j);
-                deltaC[i][j] = (int) Math.pow(x, j);
-                deltaD[i][j] = (int) Math.pow(x, j);
-                deltaE[i][j] = (int) Math.pow(x, j);
+        double[][] delta = new double[6][6];
+        double[][] deltaA = new double[6][6];
+        double[][] deltaB = new double[6][6];
+        double[][] deltaC = new double[6][6];
+        double[][] deltaD = new double[6][6];
+        double[][] deltaE = new double[6][6];
+        double[][] deltaF = new double[6][6];
+        int x;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                x = in.nextInt();
+                if (j != 6) {
+                    delta[i][j] = x;
+                    deltaA[i][j] = x;
+                    deltaB[i][j] = x;
+                    deltaC[i][j] = x;
+                    deltaD[i][j] = x;
+                    deltaE[i][j] = x;
+                    deltaF[i][j] = x;
+
+                }
+                if (j == 6) {
+                    deltaA[i][0] = x;
+                    deltaB[i][1] = x;
+                    deltaC[i][2] = x;
+                    deltaD[i][3] = x;
+                    deltaE[i][4] = x;
+                    deltaF[i][5] = x;
+                }
             }
-            deltaA[i][0] = answer;
-            deltaB[i][1] = answer;
-            deltaC[i][2] = answer;
-            deltaD[i][3] = answer;
-            deltaE[i][4] = answer;
         }
         Matrix deltaM = new Matrix(delta);
         Matrix deltaMA = new Matrix(deltaA);
@@ -35,13 +42,13 @@ public class Test {
         Matrix deltaMC = new Matrix(deltaC);
         Matrix deltaMD = new Matrix(deltaD);
         Matrix deltaME = new Matrix(deltaE);
+        Matrix deltaMF = new Matrix(deltaF);
         double a = deltaMA.determinant() / deltaM.determinant();
         double b = deltaMB.determinant() / deltaM.determinant();
         double c = deltaMC.determinant() / deltaM.determinant();
         double d = deltaMD.determinant() / deltaM.determinant();
         double e = deltaME.determinant() / deltaM.determinant();
-        double result = Math.pow(9, 0) * a + Math.pow(9, 1) * b + Math.pow(9, 2) * c + Math.pow(9, 3) * d + Math.pow(9, 4) * e;
-        System.out.println(result);
-        System.out.println(a + " " + b + " " + c + " " + d + " " + e);
+        double f = deltaMF.determinant() / deltaM.determinant();
+        System.out.println(a + " " + b + " " + c + " " + d + " " + e + " " + f);
     }
 }
